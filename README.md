@@ -58,3 +58,4 @@ sudo usermod -aG docker $USER
 
 ## Pi-Hole
 
+Use my docker-pi-hole fork: https://github.com/mijdavis2/docker-pi-hole
