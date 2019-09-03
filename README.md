@@ -76,8 +76,40 @@ docker exec -it pihole_container_name pihole -a -p
 ```
 - Save the password somewhere secure like lastpass, keypass, or credstash.
 
-### Update blacklist
+## Router
+
+**Add static IP to rpi**
+
+- Login to your router's admin console
+- Go to something like "Address Reservation" (likely under DHCP settings)
+- Using the rpi MAC address, reserve a specific IP for your pi to be fixed to
+- Save and reboot router
+- Reboot the pi
+- Make sure the pi comes up with the IP you reserved for it; you can test by going to that IP in your browser to access the pi-hole console. e.g. http://192.168.0.99/admin.
+
+**Use pihole as DNS"
+
+- Find DNS settings (likely again under DHCP settings)
+- Set the primary DNS to the IP of the rpi
+- Set the secondary to `0.0.0.0`
+- Save and reboot the router
+
+## Update blacklist
 
 - I found a community blacklist via reddit:
     - The original post: https://old.reddit.com/r/pihole/comments/8cjle5/popular_block_lists/
     - Direct link to blacklist: https://firebog.net/
+- Go to pihole admin page and login
+- Go to **Settings > Blacklists**
+- Paste the text list of blacklists you found above into the blacklists input
+- Save and update the pihole
+
+## Other config
+
+- There's a suggested whitelist on the firebog.net site. You can add those to the Whitelist settings.
+- Set DNS on the pihole itself to select between different DNS providers
+- Enable DNSSEC for more even more security
+
+## Enjoy
+
+- Enjoy ad-free and secure web browsing!
