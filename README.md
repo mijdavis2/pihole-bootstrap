@@ -69,4 +69,10 @@ sudo usermod -aG docker $USER
 
 ## Pi-Hole
 
-Use my docker-pi-hole fork: https://github.com/mijdavis2/docker-pi-hole
+- Use my docker-pi-hole fork: https://github.com/mijdavis2/docker-pi-hole
+- Once pihole is installed and running via docker, reset the password via:
+```
+docker exec -it pihole_container_name pihole -a -p
+```
+- Save the password somewhere secure like lastpass, keypass, or credstash.
+
