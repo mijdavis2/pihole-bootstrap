@@ -8,6 +8,16 @@ Setting up raspberry pi, setting up pihole, etc etc.
 - fish shell
 - pihole
 
+## Hardware reqs
+
+- Get yourself a raspberry pi. I suggest this kit: https://www.amazon.com/gp/product/B07BC7BMHY/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1
+- An SD card like this (assuming compatibility with rpi you use is similar to above): https://www.amazon.com/gp/product/B00WR4IJBE/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1
+- Ethernet cord to plug it into your router.
+
+> You can get JUST a pi and a smaller microSD card and use something like LEGOs to make yourself a housing. Google is your friend here. Just be sure to get a microSD to SD or USB converter so you can plug it into your main machine and install the rpi OS.
+
+**These instructions are for installing with linux as your main machine... but it won't be very different for OSX or Windows**.
+
 ## RPi OS Setup
 
 - Download headless version of raspbian via https://www.raspberrypi.org/downloads/raspbian/ (currently referred to "Raspbian Buster Lite")
