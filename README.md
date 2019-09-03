@@ -42,7 +42,7 @@ function fupdate
 end
 ```
 - Run `fupdate`
-- Run `sudo apt-get install git`
+- Run `sudo apt-get install -yq git`
 
 ## Docker
 
