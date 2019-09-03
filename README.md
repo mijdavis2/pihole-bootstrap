@@ -26,6 +26,9 @@ If you require wifi (i.e. no ethernet connection to your pi), use this: https://
 - If you have access to your router, find the IP address of the pi. Otherwise, use the link above to nmap and find it.
 - Run `ssh pi@<ip address>`
 - Password will be `rasbperry`
+- To change password, run: `passwd`
+- Save your password to a SECURE password manager like lastpass or keypass or credstash.
+- `exit` and ssh in again to check your new password works before we start making more changes!
 
 ## Fish (shell)
 
@@ -47,8 +50,11 @@ end
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
-
+- RESTART the pi to get docker working properly!
 - To add pi user to docker group (not necessarily recommended):
 ```
 sudo usermod -aG docker $USER
 ```
+
+## Pi-Hole
+
