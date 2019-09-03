@@ -76,3 +76,8 @@ docker exec -it pihole_container_name pihole -a -p
 ```
 - Save the password somewhere secure like lastpass, keypass, or credstash.
 
+### Update blacklist
+
+- I found a community blacklist via reddit:
+    - The original post: https://old.reddit.com/r/pihole/comments/8cjle5/popular_block_lists/
+    - Direct link to blacklist: https://firebog.net/
