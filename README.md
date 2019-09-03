@@ -33,7 +33,22 @@ If you require wifi (i.e. no ethernet connection to your pi), use this: https://
 - Run `chsh -s \`which fish\``
 - `fish`
 - Add update function:
-```function fupdate
+```
+function fupdate
     sudo apt-get update; sudo apt-get upgrade --with-new-pkgs -y; sudo apt-get autoremove -y
-end```
+end
+```
 - Run `fupdate`
+
+## Docker
+
+- Run 
+```
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+- To add pi user to docker group (not necessarily recommended):
+```
+sudo usermod -aG docker $USER
+```
