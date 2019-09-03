@@ -30,7 +30,7 @@ If you require wifi (i.e. no ethernet connection to your pi), use this: https://
 - Save your password to a SECURE password manager like lastpass or keypass or credstash.
 - `exit` and ssh in again to check your new password works before we start making more changes!
 
-## Fish (shell)
+## Essentials
 
 - Run `sudo apt-get update; sudo apt-get install -yq fish`
 - Run `chsh -s \`which fish\``
@@ -42,6 +42,7 @@ function fupdate
 end
 ```
 - Run `fupdate`
+- Run `sudo apt-get install git`
 
 ## Docker
 
