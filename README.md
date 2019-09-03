@@ -110,6 +110,12 @@ docker exec -it pihole_container_name pihole -a -p
 - Set DNS on the pihole itself to select between different DNS providers
 - Enable DNSSEC for more even more security
 
+## RPi Monitor
+
+```
+docker run --restart unless-stopped --device=/dev/vchiq --device=/dev/vcsm --volume=/opt/vc:/opt/vc --volume=/boot:/boot --volume=/sys:/dockerhost/sys:ro --volume=/etc:/dockerhost/etc:ro --volume=/proc:/dockerhost/proc:ro --volume=/usr/lib:/dockerhost/usr/lib:ro -p=8888:8888 --name="rpi-monitor" -d  michaelmiklis/rpi-monitor:latest
+```
+
 ## Enjoy
 
 - Enjoy ad-free and secure web browsing!
