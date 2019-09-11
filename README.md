@@ -7,6 +7,11 @@ Setting up raspberry pi, setting up pihole, etc etc.
 - remote access via ssh
 - fish shell
 - pihole
+- secure configs
+- custom hostnames for local devices
+- DoH
+- docker monitor
+- rpi monitor
 
 ## Hardware reqs
 
@@ -121,7 +126,7 @@ addn-hosts=/etc/pihole/hosts.lan
 ```
 - Run `sudo vim etc-pihole/hosts.lan` and add desired local hosts. Format is `<ip> <at least one white space> <hostname>`. Hostname can be whatever you want. Example:
 ```
-192.168.0.100 roku
+192.168.0.100 roku.lan
 ```
 - Once the hosts file is updated, run `docker exec -it pihole pihole restartdns`
 - Note: it will take a few seconds for pihole to restart and new names won't show up immediately. Takes a minute or two.
