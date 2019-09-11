@@ -121,13 +121,18 @@ docker exec -it pihole_container_name pihole -a -p
 
 - To set custom names for local devices, first you want to hardcode device MAC addresses to specific IPs on your router. This is likely an option in your router's DHCP settings. This will ensure IPs are reserved statically for your local devices.
 - Then in `docker-pi-hole` dir, run `sudo vim etc-dnsmasq.d/02-lan.conf` and add this one line:
+
 ```
 addn-hosts=/etc/pihole/hosts.lan
 ```
+
 - Run `sudo vim etc-pihole/hosts.lan` and add desired local hosts. Format is `<ip> <at least one white space> <hostname>`. Hostname can be whatever you want. Example:
+
 ```
+192.168.0.99  rpi.lan
 192.168.0.100 roku.lan
 ```
+
 - Once the hosts file is updated, run `docker exec -it pihole pihole restartdns`
 - Note: it will take a few seconds for pihole to restart and new names won't show up immediately. Takes a minute or two.
 
@@ -137,6 +142,12 @@ addn-hosts=/etc/pihole/hosts.lan
 docker run --restart unless-stopped --device=/dev/vchiq --device=/dev/vcsm --volume=/opt/vc:/opt/vc --volume=/boot:/boot --volume=/sys:/dockerhost/sys:ro --volume=/etc:/dockerhost/etc:ro --volume=/proc:/dockerhost/proc:ro --volume=/usr/lib:/dockerhost/usr/lib:ro -p=8888:8888 --name="rpi-monitor" -d  michaelmiklis/rpi-monitor:latest
 ```
 
+If using jwilder nginx-proxy:
+
+```
+docker run -e "VIRTUAL_HOST=rpi-monitor.rpi.lan" -e "VIRTUAL_PORT=8888" --restart unless-stopped --device=/dev/vchiq --device=/dev/vcsm --volume=/opt/vc:/opt/vc --volume=/boot:/boot --volume=/sys:/dockerhost/sys:ro --volume=/etc:/dockerhost/etc:ro --volume=/proc:/dockerhost/proc:ro --volume=/usr/lib:/dockerhost/usr/lib:ro --expose 8888 --name="rpi-monitor" -d  michaelmiklis/rpi-monitor:latest
+```
+
 Access by going to 192.168.0.99:8888 (change 192.168.0.99 to IP of your pi).
 
 ## Docker Monitor
@@ -144,7 +155,13 @@ Access by going to 192.168.0.99:8888 (change 192.168.0.99 to IP of your pi).
 To deploy a web gui for monitoring and managing docker containers, run the following do deploy a https://www.portainer.io monitor.
 
 ```
-docker run -d --name portainer -p 8000:8000 -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:linux-arm
+docker run -d -p 9000:9000 --name portainer --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:linux-arm
+```
+
+If using jwilder nginx-proxy:
+
+```
+docker run -d -e "VIRTUAL_HOST=portainer.rpi.lan" -e "VIRTUAL_PORT=9000" --expose 9000 --name portainer --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:linux-arm
 ```
 
 Immediately access the monitor and set your password by going to 192.168.0.99:9000 (change 192.168.0.99 to IP of your pi).
