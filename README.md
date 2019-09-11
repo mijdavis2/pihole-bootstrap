@@ -108,14 +108,41 @@ docker exec -it pihole_container_name pihole -a -p
 ## Other config
 
 - There's a suggested whitelist on the firebog.net site. You can add those to the Whitelist settings.
-- Set DNS on the pihole itself to select between different DNS providers
-- Enable DNSSEC for more even more security
+- In **Settings > DNS**: set DNS on the pihole itself to select between different DNS providers. NOTE: if you use the DNS over HTTPS docker-compose from https://github.com/mijdavis2/docker-pi-hole, this will already be done.
+- In **Settings > DNS**: Enable DNSSEC for more even more security
+- Optionally also check "Never forward non-FQDNs" and "Never forward reverse lookups for private IP ranges"
+
+## Set custom names for local devices
+
+- To set custom names for local devices, first you want to hardcode device MAC addresses to specific IPs on your router. This is likely an option in your router's DHCP settings. This will ensure IPs are reserved statically for your local devices.
+- Then in `docker-pi-hole` dir, run `sudo vim etc-dnsmasq.d/02-lan.conf` and add this one line:
+```
+addn-hosts=/etc/pihole/hosts.lan
+```
+- Run `sudo vim etc-pihole/hosts.lan` and add desired local hosts. Format is `<ip> <at least one white space> <hostname>`. Hostname can be whatever you want. Example:
+```
+192.168.0.100 roku
+```
+- Once the hosts file is updated, run `docker exec -it pihole pihole restartdns`
+- Note: it will take a few seconds for pihole to restart and new names won't show up immediately. Takes a minute or two.
 
 ## RPi Monitor
 
 ```
 docker run --restart unless-stopped --device=/dev/vchiq --device=/dev/vcsm --volume=/opt/vc:/opt/vc --volume=/boot:/boot --volume=/sys:/dockerhost/sys:ro --volume=/etc:/dockerhost/etc:ro --volume=/proc:/dockerhost/proc:ro --volume=/usr/lib:/dockerhost/usr/lib:ro -p=8888:8888 --name="rpi-monitor" -d  michaelmiklis/rpi-monitor:latest
 ```
+
+Access by going to 192.168.0.99:8888 (change 192.168.0.99 to IP of your pi).
+
+## Docker Monitor
+
+To deploy a web gui for monitoring and managing docker containers, run the following do deploy a https://www.portainer.io monitor.
+
+```
+docker run -d --name portainer -p 8000:8000 -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:linux-arm
+```
+
+Immediately access the monitor and set your password by going to 192.168.0.99:9000 (change 192.168.0.99 to IP of your pi).
 
 ## Enjoy
 
